@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AkılUS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .caption {
+            margin-top: 10px;
+        }
+
+        .divOzellik {
+            width: 100%;
+            height: 67px;
+            background-color: rgba(4, 56, 115, 0.975);
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .divOzellik p {
+            margin: 0;
+            padding: 0;
+            color: white;
+            margin-left: 13px;
+            font-size: 28px;
+            cursor: pointer;
+            /* Cursor'ı işaretçi yapmak için */
+        }
+
+        .divOzellik2 {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: rgba(4, 56, 115);
+            margin-top: 67px;
+            /* Üst bardan boşluk bırakmak için */
+        }
+
+        .divOzellik2::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('resimler/desen.png');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 1;
+            pointer-events: none;
+            /* Fare tıklamalarını engelle */
+        }
+
+
+        .divOzellik2 .content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            width: 100%;
+            text-align: right;
+        }
+
+        .divOzellik2 img {
+            display: inline-block;
+            width: 536px;
+            height: 369px;
+
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 87px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(4, 56, 115);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(4, 56, 115);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: rgba(4, 56, 115);
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: space-around;
+            /* Eşit aralıklarla yerleştirir */
+            align-items: center;
+            flex-wrap: wrap;
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .team-member {
+            position: relative;
+            /* LinkedIn logosu için gerekli */
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-member img {
+            width: 200px;
+            /* Sabit genişlik */
+            height: 250px;
+            /* Sabit yükseklik, dikdörtgen */
+            border-radius: 10px;
+            /* Kenarları hafif yuvarlak */
+            margin-bottom: 10px;
+            transition: filter 0.3s ease;
+            /* Geçiş süresi */
+            object-fit: cover;
+            /* Resmi dikdörtgenin içine sığdır */
+        }
+
+        .team-member:hover img {
+            filter: blur(5px);
+            /* Sadece profil fotoğrafı bulanıklaşır */
+        }
+
+        .linkedin-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            /* Başlangıçta gizli */
+            width: 10px;
+            /* LinkedIn logosu boyutu küçültüldü */
+            height: 10px;
+            z-index: 1;
+        }
+
+        .team-member:hover .linkedin-logo {
+            display: block;
+            /* Hover sırasında görünür yap */
+            filter: none;
+            /* Logo bulanıklaşmasın */
+        }
+
+        .team-member p {
+            font-size: 18px;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+
+
+
+
+        /* İletişim kısmı */
+        .contact-info {
+            text-align: left;
+            margin-left: 201px;
+            color: black;
+        }
+
+        .contact-info h1 {
+            font-size: 67px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .contact-info a {
+            color: #004A8C;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="divOzellik">
+        <img src="resimler/akilus.png" alt="logo" style="width: 53px; height: 77px; margin-left: 67px;">
+        <p style="margin-right: 469px;">AkılUS</p>
+        <p class="scroll-to-top" style="font-size: 19px; margin-right: 87px;">Anasayfa</p>
+
+        <div class="dropdown">
+            <p class="dropbtn" style="font-size: 19px;">Ürünler</p>
+            <div class="dropdown-content">
+                <a href="#maskot">MASKOT</a>
+                <a href="#rotam-cepte">Rotam Cepte</a>
+            </div>
+        </div>
+
+        <p class="scroll-to-team" style="font-size: 19px;  margin-right: 106px;">Takım Tanıtımı</p>
+        <!--<img src="resimler/vector.png" alt="a" style="width: 19px; height: 16px; margin-right: 87px;">-->
+        <p class="scroll-to-contact" style="font-size: 19px;">İletişim</p>
+    </div>
+
+
+    <!--AkılUS tanıtımı-->
+    <div class="divOzellik2">
+        <div class="content">
+            <h1 style="text-align: left; margin-left: 201px; font-size: 67px;">AkılUS</h1>
+            <p style="text-align: left; margin-left: 201px; font-size: 20px;">AkılUS olarak, yazılım ve inovatif
+                çözümler geliştiren bir ekibiz. Amacımız, teknolojinin gücünü kullanarak işletmelerin ve bireylerin
+                yaşamını kolaylaştıran, verimliliği artıran ve sürdürülebilir gelişimi destekleyen projeler ortaya
+                koymaktır.</p>
+        </div>
+
+        <div class="content">
+            <img src="resimler/akilusTanitim.png" style="margin-right: 100px" alt="AkılUS tanıtım">
+        </div>
+    </div>
+    <!--AkılUS tanıtımı-->
+
+
+    <!--MASKOT tanıtımı-->
+    <div id="maskot" class="divOzellik2" style="background-color: transparent; height: 550px;">
+        <div class="content">
+            <img src="resimler/maskotMobil.png" style="width: 530px; height: 553px;" alt="MASKOT tanıtımı">
+        </div>
+
+        <div class="content">
+            <h1 style="text-align: left; margin-left: 20px; font-size: 67px; color: black;">MASKOT</h1>
+            <p style="text-align: left; margin-left: 20px; font-size: 20px; color: black;">MASKOT girişimi, konutlara
+                enerji puanı vererek tasarruf bilincini artıran bir mobil uygulama geliştirmeyi amaçlamaktadır.<br>
+                <a href="https://maskot.akilus.com.tr" style="color: black;">Detaylı bilgi için tıklayınız.</a>
+            </p>
+
+        </div>
+
+
+    </div>
+    <!--MASKOT tanıtımı-->
+
+
+    <!--Rotam Cepte Tanıtımı-->
+    <div id="rotam-cepte" class="divOzellik2" style="background-color: rgba(4, 56, 115); height: 550px;">
+        <div class="content">
+            <h1 style="text-align: left; margin-left: 201px; font-size: 67px; color: white;">Rotam Cepte</h1>
+            <p style="text-align: left; margin-left: 201px; font-size: 20px; color: white;">Rotam Cepte mobil
+                uygulaması, ülkemizdeki tarihi bölgelere olan ilgiyi arttırarak turizm sektörüne katkı sağlamayı
+                hedeflemektedir. Kullanıcılar, önemli turizm noktalarına gittiklerinde sanal para (kripto-coin)
+                kazanacak ve bu paraları indirim olarak kullanabilecektir. Uygulama ayrıca QR kod sistemi entegrasyonu,
+                gezilen yerlerin profillere otomatik eklenmesi ve önemli turistik mekanlar hakkında paylaşımlar
+                sunacaktır.<br>
+                <a href="https://rotamcepte.com" style="color: white;">Detaylı bilgi için tıklayınız.</a>
+            </p>
+            </p>
+        </div>
+
+        <div class="content">
+            <img src="resimler/rotamCepteMobil.png" style="width: 432px; height: 516px;" alt="Rotam Cepte tanıtım">
+        </div>
+    </div>
+    <!--Rotam Cepte Tanıtımı-->
+
+
+    <!--Takım tanıtımı-->
+    <!--Takım tanıtımı-->
+    <div id="team" class="team-container">
+        <h1 style="width: 100%; text-align: center; font-size: 36px; font-weight: bold;">Takım Tanıtımı</h1>
+
+        <div class="team-member">
+            <a href="https://www.linkedin.com/in/mehmet-emin-hang%C3%BCn-b12507269/" target="_blank">
+                <img src="resimler/emin.jpeg" alt="Mehmet Emin Hangün">
+                <img class="linkedin-logo" src="resimler/linkedin-logo.png" alt="LinkedIn">
+            </a>
+            <p style="font-size: 24px;font-weight: bold;">Mehmet Emin Hangün</p>
+        </div>
+
+        <div class="team-member">
+            <a href="https://www.linkedin.com/in/ilayda-senocak/" target="_blank">
+                <img src="resimler/ilayda.jpeg" alt="İlayda Şenocak">
+                <img class="linkedin-logo" src="resimler/linkedin-logo.png" alt="LinkedIn">
+            </a>
+            <p style="font-size: 24px; font-weight: bold;">İlayda Şenocak</p>
+        </div>
+
+        <div class="team-member">
+            <a href="https://www.linkedin.com/in/meryem-arpaci/" target="_blank">
+                <img src="resimler/esma.jpeg" alt="Meryem Arpacı">
+                <img class="linkedin-logo" src="resimler/linkedin-logo.png" alt="LinkedIn">
+            </a>
+            <p style="font-size: 24px;font-weight: bold;">Esma Sarıtop</p>
+        </div>
+
+        <div class="team-member">
+            <a href="https://www.linkedin.com/in/recep-bulbul/" target="_blank">
+                <img src="resimler/harun.png" alt="Recep Bülbül">
+                <img class="linkedin-logo" src="resimler/linkedin-logo.png" alt="LinkedIn">
+            </a>
+            <p style="font-size: 24px;font-weight: bold;">Harun Biradlı</p>
+        </div>
+    </div>
+
+
+    <!--Takım tanıtımı-->
+
+
+    <!--İletişim-->
+    <div id="contact" class="divOzellik2" style="background-color: rgba(4, 56, 115); height: 300px;">
+        <div class="contact-info">
+            <h1 style="color: white;">İletişim</h1>
+            <p style="color: white;"> E-posta: <a href="mailto:maskotgirisim@gmail.com"
+                    style="color: #ffffff;">maskotgirisim@gmail.com</a>
+            </p>
+            <p style="color: white;">Instagram: <a href="https://instagram.com/maskot.app" target="_blank"
+                    style="color: #ffffff;">@maskot.app</a></p>
+        </div>
+    </div>
+    <!--İletişim-->
+
+
+    <script>
+        document.querySelectorAll('.dropdown-content a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                // Smooth scroll with offset for fixed header
+                const offset = document.querySelector('.divOzellik').offsetHeight;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollBy({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        document.querySelector('.scroll-to-top').addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        document.querySelector('.scroll-to-team').addEventListener('click', function () {
+            const targetElement = document.getElementById('team');
+            const offset = document.querySelector('.divOzellik').offsetHeight;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollBy({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        });
+
+
+        document.querySelector('.scroll-to-contact').addEventListener('click', function () {
+            const targetElement = document.getElementById('contact');
+            const offset = document.querySelector('.divOzellik').offsetHeight;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollBy({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
